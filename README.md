@@ -1,9 +1,10 @@
-# Hux Blog
+# 严皓越的算法爬塔之路
 
-### [View Live Hux Blog &rarr;](https://huangxuan.me)
+### [严皓越的博客&rarr;](https://huangxuan.me)
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
 
-## Boilerplate (beta)
+## 开博客了
+
