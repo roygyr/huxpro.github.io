@@ -35,7 +35,7 @@ tags:
 ### Encoder-Decoder模型
 
 #### The Encoder
-对于一个长度为T的文本序列*X* $ = (x_1,x_2,...,x_T) $,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为$C \in R^{K*V}$,则第$i$个词表示的词向量为，$s_i = C\omega_i$，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
+对于一个长度为T的文本序列*X* <a href="https://www.codecogs.com/eqnedit.php?latex=$&space;=&space;(x_1,x_2,...,x_T)&space;$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$&space;=&space;(x_1,x_2,...,x_T)&space;$" title="$ = (x_1,x_2,...,x_T) $" /></a>,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为$C \in R^{K*V}$,则第$i$个词表示的词向量为，$s_i = C\omega_i$，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
 
 ![encoder过程](img/encoder过程.png)
 
