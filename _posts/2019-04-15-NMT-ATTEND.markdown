@@ -13,7 +13,6 @@ tags:
     
 ---
 
-<script type="text/javascript" src="path-to-MathJax/MathJax.js">
 
 > “机器学习整理面试常见问的整理先跳票，先开一篇论文的笔记. ”
 
@@ -67,4 +66,3 @@ decoder部分同样实用RNN实现，根据encoder，我们得到了一个句子
 
 #未完待续~
 
-</script>
