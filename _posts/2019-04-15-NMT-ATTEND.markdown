@@ -5,6 +5,8 @@ subtitle:   " \"Neural Machine Translation by Jointly Learning to Align and Tran
 date:       2019-04-15 10:30:00
 author:     "Roy严皓越"
 header-img: "img/post-bg1.jpg"
+header-mask: 0.3
+mathjax: true
 catalog: true
 tags:
     - 论文笔记
