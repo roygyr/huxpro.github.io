@@ -5,6 +5,8 @@ subtitle:   " \"Neural Machine Translation by Jointly Learning to Align and Tran
 date:       2019-04-15 10:30:00
 author:     "Roy严皓越"
 header-img: "img/post-bg1.jpg"
+header-mask: 0.3
+mathjax: true
 catalog: true
 tags:
     - 论文笔记
@@ -12,6 +14,7 @@ tags:
     - image caption
     
 ---
+
 
 > “机器学习整理面试常见问的整理先跳票，先开一篇论文的笔记. ”
 
@@ -35,7 +38,8 @@ tags:
 ### Encoder-Decoder模型
 
 #### The Encoder
-对于一个长度为T的文本序列*X* $ = (x_1,x_2,...,x_T) $,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为$C \in R^{K*V}$,则第$i$个词表示的词向量为，$s_i = C\omega_i$，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
+对于一个长度为T的文本序列*X* $ = (x_1,x_2,...,x_T) $
+,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为$C \in R^{K*V}$,则第$i$个词表示的词向量为，$s_i = C\omega_i$，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
 
 ![encoder过程](img/encoder过程.png)
 
@@ -63,3 +67,4 @@ decoder部分同样实用RNN实现，根据encoder，我们得到了一个句子
 ---
 
 #未完待续~
+
