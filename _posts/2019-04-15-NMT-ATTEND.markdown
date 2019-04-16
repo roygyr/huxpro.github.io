@@ -39,15 +39,15 @@ tags:
 
 #### The Encoder
 对于一个长度为T的文本序列*X* $ = (x_1,x_2,...,x_T) $
-,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为$C \in R^{K*V}$,则第$i$个词表示的词向量为，$s_i = C\omega_i$，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
+,中每一个词都被表示成一个向量$ \omega_i \in R^v $,i=1,2...T。通常这个$ \omega_i $是一条one_hot向量。接下来就是要对要将每个词映射到一个低维的语义空间，也就是一个词向量。记映射矩阵为 $C \in R^{KV} $,则第$i$个词表示的词向量为，$s_i = C \omega_i $，向量维度*K*通常的取值在100到500之间。这个词向量在整个模型训练的过程中也会逐步更新，会变得更加有意义。
 
-![encoder过程](img/encoder过程.png)
+![encoder过程](/img/encoder过程.png)
 
 紧接着就可以用一个RNN模型压缩表示语言序列：$$h_i = \Phi_\theta(h_{i-1},s_i)=\Theta(Ws_i+Uh_{i-1}+b)$$
 
 其中$\Theta$表示隐含层的激活函数，常见的有sigmoid、tanh等。$h_T$表示整个句子的压缩结果，为了探究$h_T$的性质Sutskever et al.2014利用主成分分析找到向量$h_T$的两个主成分，并画出下图。
 
-![主成分](img/pca.png)
+![主成分](/img/pca.png)
 
 从图中可以看出，压缩向量确实可以包含原语句中的语义信息，在二维的空间表达中，距离越近语义越接近。
 
@@ -56,13 +56,13 @@ tags:
 decoder部分同样实用RNN实现，根据encoder，我们得到了一个句子的压缩表示$c = q({h_1,...,h_T})$,接着就开始计算RNN的隐藏状态$z_t,t=1,...,T$,z_t的计算公式如下：$$z_t=\Theta(c,y_{t-1},z_{t-1})$$
 其中$y_0$是结束标记“<EOS>”用以表示解码的开始与结束，$z_0$为一个全零的向量
 
-![decoder过程](img/decoder过程.png)
+![decoder过程](/img/decoder过程.png)
 
 
 #### 综合模型
 一个完整的Encoder-Decoder模型就是讲上述的两个过程相结合，结构如下：
 
-![完整模型](img/encoder-decoder.png)
+![完整模型](/img/encoder-decoder.png)
     
 ---
 
