@@ -118,7 +118,7 @@ $$ z_i = [(1-{\Gamma_i^z}) * z_{i-1}] + [{\Gamma_i^z} * z_i'] $$
 
 对其模型最主要的就是我们需要将$ T_x $的词向量翻译成$ T_y $。根据上述的过程，我们需要将encoder过程的结果与decoder的输入相匹配，也就是“对齐”
 
-$ \alpha(z_{i-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{i-1} + U_{\alpha}h_j{}) $
+$$ \alpha(z_{i-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{i-1} + U_{\alpha}h_j{}) $$
     
 ---
 
