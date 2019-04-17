@@ -112,7 +112,7 @@ $$ {\Gamma_i^r} = \sigma({W_r}e(y_i)+U_rz_{t-1}+C_rc_i) $$
 $$ z_i' = tanh({W}e(y_i)+U[\Gamma_i^r * z_{t-1}]+Cc_i) $$
 $$ z_i = [(1-{\Gamma_i^z}) * z_{i-1}] + [{\Gamma_i^z} * z_i'] $$  
 
-其中[x * y]是点乘运算
+其中$ [x * y] $是点乘运算
     
 ---
 
