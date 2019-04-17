@@ -54,6 +54,7 @@ tags:
 #### The Decoder
 
 decoder部分同样实用RNN实现，根据encoder，我们得到了一个句子的压缩表示$c = q({h_1,...,h_T})$,接着就开始计算RNN的隐藏状态$z_t,t=1,...,T$,z_t的计算公式如下：
+
 $$z_t=\Theta(c,y_{t-1},z_{t-1})$$
 
 其中$y_0$是结束标记“<EOS>”用以表示解码的开始与结束，$z_0$为一个全零的向量。根据每一层的隐藏状态，我们可以得到$y_t$的条件概率为最后的输出结果:
@@ -72,13 +73,27 @@ $$P(y_t|y_{<t},x) = softmax(W_Sz_t + b_s) $$
 
 ### Attention Model
 
-终于进入了正题了，首先再看一下Encoder的过程，Encoder需要将整个句子压缩成一个固定的向量 $c = q({h_1,...,h_T})$ ,然后在Decoder过程中用这个向量c解码成需要翻译的目标。对于向量c我们可以看做对整个句子信息的非线性压缩组合的结果，对于每一个需要翻译的目标，使用的是相等的信息，然而我们在人为做翻译的时候往往并不如此。比如像下面这样一句英文长句：
+终于进入了正题了，首先再看一下Encoder的过程，Encoder需要将整个句子压缩成一个固定的向量 $c = q({h_1,...,h_T})$,然后在Decoder过程中用这个向量c解码成需要翻译的目标。对于向量c我们可以看做对整个句子信息的非线性压缩组合的结果，对于每一个需要翻译的目标，使用的是相等的信息，然而我们在人为做翻译的时候往往并不如此。比如像下面这样一句英文长句：
     
     *There is no difference, but there is just the same kind of difference, between the mental occupations of a man of science and those of an ordinary person，as there is between the operations and methods of a bake or of a butcher weighing out his goods in common scales, and complex analysis by means of his balance and finely graded weights.*
 
-我们人为在翻译时不会直接将整个句子直接进行翻译，而是在整句阅读后依据句子逻辑来对句子进行翻译
+我们人为在翻译时不会直接将整个句子直接进行翻译，而是在整句阅读后依据句子逻辑来对句子进行拆分然后再进行翻译。依据我们人类的经验而言很明显，我们这种翻译的方式一定会更加准确和高效。很多研究者的实验结果，以BLEU作为衡量翻译效果的指标，可以发现随着句子长度的增加，翻译的效果是下降的：
+
+![BLEU](/img/BLEU.png)
+    
+因此我们需要建立一种方式，能够表达这种人类在翻译过程中甚至是很多人类活动中这种“分段识别”的方法，被称为“注意力”，也就是我们说的Attention Model。
+
+我们回到Decoder过程中，原模型中用于编码的LSTM网络传递的中间状态的计算方式为：$z_t=\Theta(c,y_{t-1},z_{t-1})$，c为之前解码过程中生成的固定长度的向量。我们想要引入注意力机制，因此对于不同的输入状态{$ y_{t-1},z_{t-1} $}，采用不同的的向量c，因此中间状态变为：
+
+$$ z_t=\Theta(c_{i},y_{t-1},z_{t-1}) $$
+    
+其中$c_i$的计算公式为：$c_i = \displaystyle \sum^{T_x}_{j = 1}{a_{ij}h_j}$
+$a_{ij}$的计算公式为$a_{ij} = \frac{exp(e_{ij})}{\sum^{T_x}_{k=1}exp(e_{ik})} $
+$ e_{ij} $的计算公式为$ e_{ij} = a(si−1, hj)$
+    
+
+    
     
 ---
 
 #未完待续~
-
