@@ -87,8 +87,8 @@ $$P(y_t|y_{<t},x) = softmax(W_Sz_t + b_s) $$
 
 $$ z_t=\Theta(c_{i},y_{t-1},z_{t-1}) $$
     
-其中$ c_i $的计算公式为$ c_i = \displaystyle \sum^ {T_x} _ {j = 1}{a_{ij}h_j} $
-$ a_{ij} $的计算公式为$ a_{ij} = \frac{exp(e_{ij})}{\sum^{T_x}_{k=1}exp(e_{ik})} $
+其中$ c_i $的计算公式为$ c_i = \displaystyle{\sum_{j = 1}^{T_x}{a_{ij}h_j}} $
+$ a_{ij} $的计算公式为$ a_{ij} = \frac{exp(e_{ij})}{\sum_{k=1}^{T_x}exp(e_{ik})} $
 $ e_{ij} $的计算公式为$ e_{ij} = a(si−1, hj) $
     
 
