@@ -89,7 +89,7 @@ $$ z_t=\Theta(c_{i},y_{t-1},z_{t-1}) $$
     
 其中$ c_i $的计算公式为$ c_i = \displaystyle{\sum_{j = 1}^{T_x}{a_{ij}h_j}} $,
 $ a_{ij} $的计算公式为$ a_{ij} = \frac{exp(e_{ij})}{\sum_{k=1}^{T_x}exp(e_{ik})} $,
-$ e_{ij} $的计算公式为$ e_{ij} = a(si−1, hj) $
+$ e_{ij} $的计算公式为$ e_{ij} = a(s_{i−1}, hj) $
 
 综上所述网络的主题结构如下：
 ![网络结构](/img/NetWork.png)
