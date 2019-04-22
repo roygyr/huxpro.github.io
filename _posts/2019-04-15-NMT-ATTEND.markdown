@@ -172,28 +172,28 @@ $$ p(y_t|{a,{y^{t-1}_1}}) \varpropto exp(L_o(Ey_{t-1} + L_h h_t + L_z \hat{z}_t)
 
 #### Stochastic “Hard” Attention
 定义一个变量$ s_t $ 来表示在生成第t个单词时，模型的注意力应该置于何处。$ s_{ti} $ 是一个one-hot向量，来表示是否使用第i个位置上的图像特征。在这里，假设$ s_{ti} $服从于一个参数为$ \{ \alpha_i\} $ 的multinoulli分布，$ \hat{z}_t $是一个随机变量
-![equ_8_9](/img/equ_8_9.png)
+![equ_8_9](/img/SAT/equ_8_9.png)
 
 显然该任务的目标是使得$ p(y | a) $ 最大，本篇论文定义一个新的目标函数$ L_s $,这个目标函数是原始目标函数的边缘对数似然函数的变分下界，在优化过程中，可以对新的目标函数求导
-![equ_10_11](/img/equ_10_11.png)
+![equ_10_11](/img/SAT/equ_10_11.png)
 
 由于$ s_{ti} $是服从于multinoulli分布，因此可以使用蒙特卡罗方式估计梯度
-![equ_12](/img/equ_12.png)
+![equ_12](/img/SAT/equ_12.png)
 
 为了降低估计变量的方差，采用了移动平均估计，训练过程中，第k个mini-batch的参数设定为：
-![b_k](/img/b_k.png)
+![b_k](/img/SAT/b_k.png)
 
 另外为了减少方差，文章中还加入了multinoulli分布的熵函数$ H[s] $,最终梯度计算公式如下,其中$ \lambda_r,\lambda_e$是超参数，需要自己设定
-![Ls_W](/img/Ls_W.png)
+![Ls_W](/img/SAT/Ls_W.png)
 
 #### Deterministic “Soft” Attention
 学习随机注意机制需要每次对位置注意力进行抽样，我们可以直接使用$ \hat{z}_t $的期望,和上篇文章attention一致，现在模型是光滑的，可以使用反向传播进行求解。学习这个软注意机制可以被理解为近似地优化原始目标函数$ p(y | a) $的对数似然
-![equ_13](/img/equ_13.png)
+![equ_13](/img/SAT/equ_13.png)
 
 本文定义一个归一化加权几何平均值NWGM，：
-![NWGM](/img/NWGM.png)
+![NWGM](/img/SAT/NWGM.png)
 NWGM是一个softmax单元出来的结果，并且有：
-![NWGM_1](/img/NWGM_1.png)
+![NWGM_1](/img/SAT/NWGM_1.png)
 这就意味着学习这个软注意机制近似于优化原始目标函数$ p(y | a) $的对数似然
 
 #### DOUBLY STOCHASTIC ATTENTION
