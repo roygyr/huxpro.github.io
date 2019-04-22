@@ -146,22 +146,33 @@ Image caption顾名思义，即可让算法根据输入的一幅图自动生成�
 
 #### ENCODER: CONVOLUTIONAL FEATURES
 模型输入时一张原始图片，输出是1-of-K单词序列编码y,K是词汇表大小，C是y的长度
-$$ y = \{y_1,...,y_c\},y_i \in R^K $$
+$$ 
+y = \{y_1,...,y_c\},y_i \in R^K 
+$$
 
 这篇文章使用卷积神经网络来提取出一组特征向量作为对图片的描述，这组向量包含L个向量，每个向量维度为D。不同于以往采用全连接层作为图像特征，这次是直接使用卷积层conv5_3作为特征。
-$$ a = \{a_1,...,a_L\},a_i \in R^D $$
+$$ 
+a = \{a_1,...,a_L\},a_i \in R^D 
+$$
 
 #### DECODER: LONG SHORT-TERM MEMORY NETWORK
 解码方式与第一篇类似，RNN单元使用的是lstm。
 
 #### attention机制
 attention机制与第一篇文章类似，本篇论文表达如下：
-$$ e_{ti} = f_att(a_i,h_{t-1}) $$
+$$ 
+e_{ti} = f_att(a_i,h_{t-1}) 
+\alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}}
+\hat{z}_t = \phi(\{a_i\},\{\alpha_i\})
+$$
 $$ \alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}} $$
 $$ \hat{z}_t = \phi(\{a_i\},\{\alpha_i\}) $$
 
 本篇文章状态初始化如下：
-$$ c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
+$$ 
+c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
+h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
+$$
 $$ h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
 
 最后采用deep output layer来计算对应位置的单词条件概率
