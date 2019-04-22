@@ -195,7 +195,7 @@ $$ p(y_t|{a,{y^{t-1}_1}}) \varpropto exp(L_o(Ey_{t-1} + L_h h_t + L_z \hat{z}_t)
 ![Ls_W](/img/SAT/Ls_W.png)
 
 #### Deterministic “Soft” Attention
-学习随机注意机制需要每次对位置注意力进行抽样，我们可以直接使用$ \hat{z}_t $的期望,和上篇文章attention一致，现在模型是光滑的，可以使用反向传播进行求解。学习这个软注意机制可以被理解为近似地优化原始目标函数$ p(y | a) $的对数似然
+学习随机注意机制需要每次对位置注意力进行抽样，我们可以直接使用$ \hat{z}_t $ 的期望,和上篇文章attention一致，现在模型是光滑的，可以使用反向传播进行求解。学习这个软注意机制可以被理解为近似地优化原始目标函数$ p(y | a) $的对数似然
 ![equ_13](/img/SAT/equ_13.png)
 
 本文定义一个归一化加权几何平均值NWGM，：
@@ -207,7 +207,13 @@ NWGM是一个softmax单元出来的结果，并且有：
 #### DOUBLY STOCHASTIC ATTENTION
 上述结果可以看到在生成第t个单词时，每个位置的权重和为1,$ \sum_i {\alpha_{ti}} = 1$，这是因为每个位置的权重是softmax结果。在训练soft attention时，本文引入了一个双重随机正则，还希望在每个位置上，生成不同的单词时的权重和也尽量为1，$ \sum_t {\alpha_{ti}} \approx 1$，目的是让attention平等的对待图片的每一区域。
 
-另外本文还定义了阈值$ \beta  = \sigma(f_{\beta}(h_{t-1}))$,$ \hat{z}_t = \phi = \beta \sum_{i}^{L}{\alpha_i a_i} $,本文发现该$ \beta $可以使得attention权重重点放在图片中的目标上。
+另外本文还定义了阈值：
+
+$$ \beta  = \sigma(f_{\beta}(h_{t-1}))$$
+
+本文发现该$ \beta $可以使得attention权重重点放在图片中的目标上
+
+$$\hat{z}_t = \psi = \beta \sum_{i}^{L}{\alpha_i a_i} $
 
 最终目标函数为：
 
