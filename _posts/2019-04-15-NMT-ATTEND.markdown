@@ -168,6 +168,7 @@ $$ \hat{z}_t = \phi(\{a_i\},\{\alpha_i\}) $$
 本篇文章状态初始化如下：
 
 $$ c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
+
 $$ h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
 
 最后采用deep output layer来计算对应位置的单词条件概率
