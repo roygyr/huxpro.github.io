@@ -213,7 +213,7 @@ $$ \beta  = \sigma(f_{\beta}(h_{t-1}))$$
 
 本文发现该$ \beta $可以使得attention权重重点放在图片中的目标上
 
-$$ \hat{z}_t = \Psi = \beta \sum_{i}^{L}{\alpha_i a_i} $$
+$$ \hat{z}_t = \Psi\(\{\alpha_i\},\{a_i\}) = \beta \sum_{i}^{L}{\alpha_i a_i} $$
 
 最终目标函数为：
 
