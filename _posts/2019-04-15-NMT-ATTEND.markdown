@@ -165,15 +165,12 @@ e_{ti} = f_att(a_i,h_{t-1})
 \alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}}
 \hat{z}_t = \phi(\{a_i\},\{\alpha_i\})
 $$
-$$ \alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}} $$
-$$ \hat{z}_t = \phi(\{a_i\},\{\alpha_i\}) $$
 
 本篇文章状态初始化如下：
 $$ 
 c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
 h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
 $$
-$$ h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
 
 最后采用deep output layer来计算对应位置的单词条件概率
 $$ p(y_t|{a,{y^{t-1}_1}}) \varpropto exp(L_o(Ey_{t-1} + L_h h_t + L_z \hat{z}_t)) $$
