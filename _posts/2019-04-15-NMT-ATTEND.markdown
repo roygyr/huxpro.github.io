@@ -4,6 +4,7 @@ title:      "论文阅读笔记"
 subtitle:   " \"Neural Machine Translation by Jointly Learning to Align and Translate\""
 date:       2019-04-15 10:30:00
 author:     "Roy严皓越"
+header-style: text
 header-img: "img/post-bg1.jpg"
 header-mask: 0.3
 mathjax: true
