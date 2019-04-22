@@ -159,19 +159,19 @@ $$ a = \{a_1,...,a_L\},a_i \in R^D $$
 #### attention机制
 attention机制与第一篇文章类似，本篇论文表达如下：
 
-$$ 
-e_{ti} = f_att(a_i,h_{t-1}) 
-\alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}}
-\hat{z}_t = \phi(\{a_i\},\{\alpha_i\})
-$$
+$$ e_{ti} = f_att(a_i,h_{t-1}) $$
+
+$$ \alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}} $$
+
+$$ \hat{z}_t = \phi(\{a_i\},\{\alpha_i\}) $$
 
 本篇文章状态初始化如下：
-$$ 
-c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
-h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}})
-$$
+
+$$ c_0 = f_{init,c}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
+$$ h_0 = f_{init,h}({\frac{1}{L}{\sum_{i}^{L} {a_i}}}) $$
 
 最后采用deep output layer来计算对应位置的单词条件概率
+
 $$ p(y_t|{a,{y^{t-1}_1}}) \varpropto exp(L_o(Ey_{t-1} + L_h h_t + L_z \hat{z}_t)) $$
 
 ### Learning Stochastic “Hard” vs Deterministic “Soft” Attention
@@ -209,6 +209,7 @@ NWGM是一个softmax单元出来的结果，并且有：
 另外本文还定义了阈值$ \beta  = \sigma(f_{\beta}(h_{t-1}))$,$ \hat{z}_t = \phi(\{a_i\},\{\alpha_i\}) = \beta \sum_{i}^{L}{\alpha_i a_i} $,本文发现该$ \beta $可以使得attention权重重点放在图片中的目标上。
 
 最终目标函数为：
+
 $$ L_d = -log(p(y | x)) + \lambda {\sum_{i}^{L} {(1 - \sum_{t}^{C} {\alpha_{ti}}})^2} $$
 
 
