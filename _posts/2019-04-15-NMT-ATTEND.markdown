@@ -7,7 +7,7 @@ author:     "Roy严皓越"
 header-style: text
 header-img: "img/post-bg1.jpg"
 mathjax: true
-catalog: true
+catalog: False
 tags:
     - 论文笔记
     - attention model
