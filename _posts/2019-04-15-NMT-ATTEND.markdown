@@ -107,17 +107,17 @@ $$ h_j = [h_j^{left},h_j^{right}] $$
     
 #### RNN神经网络--加入门控
 
-对于解码过程中RNN的神经元，论文使用了门控隐藏单元，类似于Hochreiter和Schmidhuber(1997)早先提出的长短期内存(LSTM)单元，与它共享更好的建模和学习长期依赖关系的能力，这样一定程度上避免了RNN网络在反向传播过程中容易出现的梯度消失的问题。首先是两个门控单元：
+对于解码过程中RNN的神经元，论文使用了门控隐藏单元，类似于Hochreiter和Schmidhuber(1997)早先提出的lstm单元，与它共享更好的建模和学习长期依赖关系的能力，这样一定程度上避免了RNN网络在反向传播过程中容易出现的梯度消失的问题。首先是两个门控单元：
 
-$$ {\Gamma_i^z} = \sigma({W_z}e(y_i)+U_zz_{t-1}+C_zc_i) $$
+$$ {\Gamma_t^z} = \sigma({W_z}e(y_t)+U_zz_{t-1}+C_zc_t) $$
 
-$$ {\Gamma_i^r} = \sigma({W_r}e(y_i)+U_rz_{t-1}+C_rc_i) $$   
+$$ {\Gamma_t^r} = \sigma({W_r}e(y_t)+U_rz_{t-1}+C_rc_t) $$   
     
-计算隐藏层的传递状态$ z_i $:
+计算隐藏层的传递状态$ z_t $:
 
-$$ z_i' = tanh({W}e(y_i)+U[\Gamma_i^r * z_{t-1}]+Cc_i) $$
+$$ z_t' = tanh({W}e(y_t)+U[\Gamma_t^r * z_{t-1}]+Cc_t) $$
 
-$$ z_i = [(1-{\Gamma_i^z}) * z_{i-1}] + [{\Gamma_i^z} * z_i'] $$  
+$$ z_t = [(1-{\Gamma_t^z}) * z_{t-1}] + [{\Gamma_t^z} * z_t'] $$  
 
 其中[x * y]是点乘运算
     
