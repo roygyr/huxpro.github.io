@@ -219,5 +219,52 @@ $$ \hat{z}_t = \Psi(\{\alpha_i\},\{a_i\}) = \beta \sum_{i}^{L}{\alpha_i a_i} $$
 
 $$ L_d = -log(p(y | x)) + \lambda {\sum_{i}^{L} {(1 - \sum_{t}^{C} {\alpha_{ti}}})^2} $$
 
+# Attention Is All You Need
+## 背景
+机器翻译的网络大多数建立在RNN上使用attention，这样的网络在计算上没有办法进行并行运算并且结构较复杂，所以本文提出了一种完全依赖于attention的网络叫做Transfomer。Transfomer是第一个完全依赖于自我注意来计算其输入和输出的表示，而不使用序列对齐的RNNs或卷积的转换模型。
+
+## Model Architecture
+本文Transfomer整体模型结构如下：
+![fig_1](/img/AYNIA/fig_1.png)
+
+### Encoder and Decoder Stacks
+
+#### Encoder
+Encoder是由6个相同的组件组成，每个组件包含两种隐藏层，一种是multi-head self-attention机制，另一种是优化后的全连接层。每个隐藏层之间加入了残差结构和标准化结构$ LayerNorm(x + Sublayer(x)) $
+
+#### Decoder
+Decoder也是由6个相同的组件组成，每个组件包含3个隐藏层，其中两个与Encoder中相同，另外还加入了与Encoder输出相连接的attention层，同样每个隐藏层都加入了残差和标准化结构。并且为了确保位置i的预测只能依赖于位置i以下的已知输出，对Decoder的self-attention进行了mask
+![encoder_6_decoder](/img/AYNIA/encoder_6_decoder.png)
+![encoder_decoder](/img/AYNIA/encoder_decoder.png)
+
+### Attention
+本文的attention机制叫做Multi-Head Attention，它是由h个Scaled Dot-Product Attention构成的，如图：
+![Multi-Head](/img/AYNIA/Multi-Head.png)
+
+#### Scaled Dot-Product Attention
+一个attention函数可以描述为将Q(query)和一组键K(key)-值V(value)对 映射到输出，其中Q、K、V和输出都是向量。其中最重要的一步是计算Q和K的相似度，其中常见的相似度计算方式有如下几种,本文选择的是第一种方式，并且对相似度进行了标准化处理(除以$ \sqrt{d_k} $)。之所以选择第一种，是因为点乘计算在并行计算上更高效，相对于加法运算来说。本文发现在$ d_k$较小时，点乘模型和加法模型在效果上近似，当$ d_k$较大时，点乘模型比加法模型效果差，怀疑是由于点乘量级过大导致softmax梯度过小，所以将相似度计算除以了$ \sqrt{d_k} $，所以最终attention模型为：
+![Q-K](/img/AYNIA/Q-K.png)
+![atten](/img/AYNIA/atten.png)
+
+#### Multi-Head Attention
+公式为：
+![multi-head-eq](/img/AYNIA/multi-head-eq.png)
+它是将多个$ head_i$连接到一起，再全连接（线性变换）到输出结果。其中$ head_i$是由输入Q、K、V进行一次线性变换之后的Scaled Dot-Product Attention结果。
+
+#### Applications of Attention in our Model
+在encoder-decoder attention层，Q来自于上一层decoder输出，K和V来自于encoder输出（K和V一样）；
+在encoder层是self-attention，Q、K、V相同，都是上一层encoder输出结果；
+在decoder层也有self-attention层，Q、K、V相同，都是上一层decoder输出结果，不同的是这里加入了mask；
+![mask](/img/AYNIA/mask.png)
+
+### Position-wise Feed-Forward Networks
+公式如下：
+![eq_2](/img/AYNIA/eq_2.png)
+
+### position embedding
+论文采用self-attention的一个缺点就是无法使用word的位置信息。rnn可以使用位置信息，因为当位置变化时（比如互换两个word的位置）rnn的输出就会改变。而self-attention各个位置可以说是相互独立的，输出只是各个位置的信息加权输出，并没有考虑各个位置的位置信息。cnn也有类似位置无关的特点。以往的pe往往采用类似word_embedding式的可以随网络训练的位置参数，google提出了一种固定的pe算法：
+![pe_sin](/img/AYNIA/pe_sin.png)
+即在偶数位置，此word的pe是sin函数，在奇数位置，word的pe是cos函数。论文说明了此pe和传统的训练得到的pe效果接近。并且因为 sin(α+β)=sinα cosβ+cosα sinβ 以及 cos(α+β)=cosα cosβ−sinα sinβ，位置 p+k 的向量可以用位置 p 的向量的线性变换表示，这也说明此pe不仅可以表示绝对位置，也能表示相对位置。
+
 
 
