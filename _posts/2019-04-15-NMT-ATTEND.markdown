@@ -16,7 +16,7 @@ tags:
 ---
 
 ## 前言
-先开一篇论文的阅读笔记，准确的说是三篇一起:
+先开一篇关于attention论文的阅读笔记，准确的说是三篇论文一起:
 
 第一篇是:[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473v2)是Attention Model的开篇之作，虽然本文主要应用的是机器翻译的领域，但是之后对各个领域都产生的深远影响，并且产生了很多变形与应用。
 
