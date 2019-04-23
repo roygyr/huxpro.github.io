@@ -85,13 +85,13 @@ $$P(y_t|y_{<t},x) = softmax(W_sz_t + b_z) $$
 
 我们回到Decoder过程中，原模型中用于编码的LSTM网络传递的中间状态的计算方式为：$z_t=\Theta(c,y_{t-1},z_{t-1})$，c为之前解码过程中生成的固定长度的向量。我们想要引入注意力机制，因此对于不同的输入状态{$ y_{t-1},z_{t-1} $}，采用不同的的向量c，因此中间状态变为：
 
-$$ z_t=\Theta(c_{i},y_{t-1},z_{t-1}) $$
+$$ z_t=\Theta(c_{t},y_{t-1},z_{t-1}) $$
     
-其中$ c_i $的计算公式为$ c_i = \displaystyle{\sum_{j = 1}^{T_x}{a_{ij}h_j}} $,
-$ a_{ij} $的计算公式为$ a_{ij} = \frac{exp(e_{ij})}{\sum_{k=1}^{T_x}exp(e_{ik})} $,
-$ e_{ij} $的计算公式为$ e_{ij} = a(z_{i−1}, hj) $
+其中$ c_t $的计算公式为$ c_t = \displaystyle{\sum_{j = 1}^{T_x}{a_{tj}h_j}} $,
+$ a_{tj} $的计算公式为$ a_{tj} = \frac{exp(e_{tj})}{\sum_{k=1}^{T_x}exp(e_{tk})} $,
+$ e_{tj} $的计算公式为$ e_{tj} = a(z_{t−1}, hj) $
 
-综上所述网络的主题结构如下：
+综上所述网络的主体结构如下：
 ![网络结构](/img/NetWork.png)
 
 
@@ -99,11 +99,11 @@ $ e_{ij} $的计算公式为$ e_{ij} = a(z_{i−1}, hj) $
 
 通常的RNN，如式上面Encoder-Decoder所述，按照从第一个符号$ X_1 $到最后一个符号$ X_Tx $的顺序读取输入序列X。然而，在建议的方案中，我们希望每个单词的注释不仅要总结前面的单词，还要总结下面的单词。因此，论文提出了使用双向RNN的方式。对于双向RNN模型，每层的隐藏状态表达如下,这里字符不好表达，还请谅解。
 
-$$ h_t^{left} = f(W_{x}^{left}X_t+W_h^{left}h_{t-1}^{left}) $$
+$$ h_j^{left} = f(W_{x}^{left}X_j+W_h^{left}h_{j-1}^{left}) $$
 
-$$ h_t^{right} = f(W_{x}^{right}X_t+W_h^{right}h_{t-1}^{right}) $$
+$$ h_j^{right} = f(W_{x}^{right}X_j+W_h^{right}h_{j-1}^{right}) $$
 
-$$ h_t = [h_t^{left},h_t^{right}] $$
+$$ h_j = [h_j^{left},h_j^{right}] $$
     
 #### RNN神经网络--加入门控
 
