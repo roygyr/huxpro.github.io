@@ -220,6 +220,8 @@ $$ \hat{z}_t = \Psi(\{\alpha_i\},\{a_i\}) = \beta \sum_{i}^{L}{\alpha_i a_i} $$
 
 $$ L_d = -log(p(y | x)) + \lambda {\sum_{i}^{L} {(1 - \sum_{t}^{C} {\alpha_{ti}}})^2} $$
 
+---
+
 # Attention Is All You Need
 ## 背景
 机器翻译的网络大多数建立在RNN上使用attention，这样的网络在计算上没有办法进行并行运算并且结构较复杂，所以本文提出了一种完全依赖于attention的网络叫做Transfomer。Transfomer是第一个完全依赖于自我注意来计算其输入和输出的表示，而不使用序列对齐的RNNs或卷积的转换模型。
@@ -269,5 +271,6 @@ Decoder也是由6个相同的组件组成，每个组件包含3个隐藏层，�
 ![pe_sin](/img/AYNIA/pe_sin.png)
 即在偶数位置，此word的pe是sin函数，在奇数位置，word的pe是cos函数。论文说明了此pe和传统的训练得到的pe效果接近。并且因为 sin(α+β)=sinα cosβ+cosα sinβ 以及 cos(α+β)=cosα cosβ−sinα sinβ，位置 p+k 的向量可以用位置 p 的向量的线性变换表示，这也说明此pe不仅可以表示绝对位置，也能表示相对位置。
 
-
+---
+参考博客（待整理）
 
