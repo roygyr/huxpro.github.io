@@ -230,7 +230,9 @@ $$ L_d = -log(p(y | x)) + \lambda {\sum_{i}^{L} {(1 - \sum_{t}^{C} {\alpha_{ti}}
 ### Encoder and Decoder Stacks
 
 #### Encoder
-Encoder是由6个相同的组件组成，每个组件包含两种隐藏层，一种是multi-head self-attention机制，另一种是优化后的全连接层。每个隐藏层之间加入了残差结构和标准化结构$ LayerNorm(x + Sublayer(x)) $
+Encoder是由6个相同的组件组成，每个组件包含两种隐藏层，一种是multi-head self-attention机制，另一种是优化后的全连接层。每个隐藏层之间加入了残差结构和标准化结构
+
+$$ LayerNorm(x + Sublayer(x)) $$
 
 #### Decoder
 Decoder也是由6个相同的组件组成，每个组件包含3个隐藏层，其中两个与Encoder中相同，另外还加入了与Encoder输出相连接的attention层，同样每个隐藏层都加入了残差和标准化结构。并且为了确保位置i的预测只能依赖于位置i以下的已知输出，对Decoder的self-attention进行了mask
