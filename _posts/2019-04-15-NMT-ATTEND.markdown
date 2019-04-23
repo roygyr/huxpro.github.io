@@ -15,12 +15,8 @@ tags:
     
 ---
 
-
-> “机器学习整理面试常见问的整理先跳票，先开一篇论文的笔记. ”
-
-
 ## 前言
-说好的机器学习面试问题整理成功跳票，意料之内，哈哈哈。先开一篇论文的阅读笔记，准确的说是三篇一起:
+先开一篇论文的阅读笔记，准确的说是三篇一起:
 
 第一篇是:[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473v2)是Attention Model的开篇之作，虽然本文主要应用的是机器翻译的领域，但是之后对各个领域都产生的深远影响，并且产生了很多变形与应用。
 
