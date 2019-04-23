@@ -31,7 +31,7 @@ tags:
 
 ---
 
-# Neural Machine Translation by Jointly Learning to Align and Translate
+# 1.Neural Machine Translation by Jointly Learning to Align and Translate
 
 ### 背景
 
@@ -130,7 +130,7 @@ $$ \alpha(z_{t-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{t-1} + U_{\alpha}h_j{}) $$
     
 ---
 
-# Show, Attend and Tell:Neural Image Caption Generation with Visual Attention
+# 2.Show, Attend and Tell:Neural Image Caption Generation with Visual Attention
 
 ### 背景
 attention机制不仅仅用在了机器翻译领域，对其他领域也有影响。这篇文章是在image caption任务下加入了attention机制，对该领域产生了深远影响。
@@ -222,7 +222,7 @@ $$ L_d = -log(p(y | x)) + \lambda {\sum_{i}^{L} {(1 - \sum_{t}^{C} {\alpha_{ti}}
 
 ---
 
-# Attention Is All You Need
+# 3.Attention Is All You Need
 ## 背景
 机器翻译的网络大多数建立在RNN上使用attention，这样的网络在计算上没有办法进行并行运算并且结构较复杂，所以本文提出了一种完全依赖于attention的网络叫做Transfomer。Transfomer是第一个完全依赖于自我注意来计算其输入和输出的表示，而不使用序列对齐的RNNs或卷积的转换模型。
 
