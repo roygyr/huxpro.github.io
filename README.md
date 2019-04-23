@@ -1,6 +1,6 @@
-# 严皓越的算法爬塔之路
+# royAIgyr的算法爬塔之路
 
-### [严皓越的博客&rarr;](https://huangxuan.me)
+### [royAIgyr的博客&rarr;](https://huangxuan.me)
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
