@@ -2,7 +2,7 @@
 layout:     post
 title:      "论文阅读笔记"
 subtitle:   " \"Neural Machine Translation by Jointly Learning to Align and Translate\""
-date:       2019-04-15 10:30:00
+date:       2019-04-22 
 author:     "gyr郭雁茹"
 header-style: text
 header-img: "img/post-bg1.jpg"
@@ -254,8 +254,8 @@ Decoder也是由6个相同的组件组成，每个组件包含3个隐藏层，�
 它是将多个$ head_i$连接到一起，再全连接（线性变换）到输出结果。其中$ head_i$是由输入Q、K、V进行一次线性变换之后的Scaled Dot-Product Attention结果。
 
 #### Applications of Attention in our Model
-在encoder-decoder attention层，Q来自于上一层decoder输出，K和V来自于encoder输出（K和V一样);
-在encoder层是self-attention，Q、K、V相同，都是上一层encoder输出结果;
+在encoder-decoder attention层，Q来自于上一层decoder输出，K和V来自于encoder输出（K和V一样);<br>
+在encoder层是self-attention，Q、K、V相同，都是上一层encoder输出结果;<br>
 在decoder层也有self-attention层，Q、K、V相同，都是上一层decoder输出结果，不同的是这里加入了mask。
 ![mask](/img/AYNIA/mask.png)
 
