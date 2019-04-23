@@ -1,10 +1,10 @@
 # Site settings
-title: Roy Blog
-SEOTitle: 严皓越的博客 | Roy Blog
+title: royAIgyr Blog
+SEOTitle: royAIgyr Blog
 header-img: img/home-bg.jpg
-email: 963432097@qq.com
+email: 963432097@qq.com |875596390@qq.com
 description: "职业生涯的起步，记录挣扎的每一天"
-keyword: "严皓越，算法工程师"
+keyword: "算法工程师和机器学习工程师"
 url: "https://roygyr.github.io/"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
