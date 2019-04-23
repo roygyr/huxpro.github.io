@@ -89,7 +89,7 @@ $$ z_t=\Theta(c_{t},y_{t-1},z_{t-1}) $$
     
 其中$ c_t $的计算公式为$ c_t = \displaystyle{\sum_{j = 1}^{T_x}{a_{tj}h_j}} $,
 $ a_{tj} $的计算公式为$ a_{tj} = \frac{exp(e_{tj})}{\sum_{k=1}^{T_x}exp(e_{tk})} $,
-$ e_{tj} $的计算公式为$ e_{tj} = a(z_{t−1}, hj) $
+$ e_{tj} $的计算公式为$ e_{tj} = a(z_{t−1}, h_j) $
 
 综上所述网络的主体结构如下：
 ![网络结构](/img/NetWork.png)
@@ -107,7 +107,7 @@ $$ h_j = [h_j^{left},h_j^{right}] $$
     
 #### RNN神经网络--加入门控
 
-对于解码过程中RNN的神经元，论文使用了门控隐藏单元，类似于Hochreiter和Schmidhuber(1997)早先提出的lstm单元，与它共享更好的建模和学习长期依赖关系的能力，这样一定程度上避免了RNN网络在反向传播过程中容易出现的梯度消失的问题。首先是两个门控单元：
+对于解码过程中RNN的神经元，论文使用了门控隐藏单元，类似于Hochreiter和Schmidhuber(1997)早先提出的lstm单元，与它共享更好的建模和学习长期依赖关系的能力，这样一定程度上避免了RNN网络在反向传播过程中容易出现的梯度消失的问题。首先是两个门控单元$\Gamma_t^z$是更新门，表示每个隐藏单元保持其先前的激活的比例,$\Gamma_t^r$是重置门，表示应该重置多少来自上一层隐藏状态的信息：
 
 $$ {\Gamma_t^z} = \sigma({W_z}e(y_t)+U_zz_{t-1}+C_zc_t) $$
 
@@ -115,7 +115,7 @@ $$ {\Gamma_t^r} = \sigma({W_r}e(y_t)+U_rz_{t-1}+C_rc_t) $$
     
 计算隐藏层的传递状态$ z_t $:
 
-$$ z_t' = tanh({W}e(y_t)+U[\Gamma_t^r * z_{t-1}]+Cc_t) $$
+$$ z_t' = tanh({W}e(y_{t-1})+U[\Gamma_t^r * z_{t-1}]+Cc_t) $$
 
 $$ z_t = [(1-{\Gamma_t^z}) * z_{t-1}] + [{\Gamma_t^z} * z_t'] $$  
 
@@ -123,9 +123,9 @@ $$ z_t = [(1-{\Gamma_t^z}) * z_{t-1}] + [{\Gamma_t^z} * z_t'] $$
     
 #### 对齐模型
 
-对其模型最主要的就是我们需要将$ T_x $的词向量翻译成$ T_y $。根据上述的过程，我们需要将encoder过程的结果与decoder的输入相匹配，也就是“对齐”
+对齐模型最主要的就是我们需要将$ T_x $的词向量翻译成$ T_y $。根据上述的过程，我们需要将encoder过程的结果与decoder的输入相匹配，也就是“对齐”
 
-$$ \alpha(z_{i-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{i-1} + U_{\alpha}h_j{}) $$
+$$ \alpha(z_{t-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{t-1} + U_{\alpha}h_j{}) $$
     
 ---
 
