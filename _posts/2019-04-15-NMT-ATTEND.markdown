@@ -134,7 +134,7 @@ $$ \alpha(z_{t-1},h_j) = v_{\alpha}tanh(W_{\alpha}z_{t-1} + U_{\alpha}h_j{}) $$
 ### 背景
 attention机制不仅仅用在了机器翻译领域，对其他领域也有影响。这篇文章是在image caption任务下加入了attention机制，对该领域产生了深远影响。
 
-Image caption顾名思义，即可让算法根据输入的一幅图自动生成对应的描述性文字。有点类似于看图说话的感觉，该任务类似于机器翻译，网络主要结构也是encoder-decoder这一些列模型以及他们的变体。与机器翻译的区别在于编码结果是用CNN将图片信息提取的结果。图片描述早期做法如下图所示：
+Image caption顾名思义，即可让算法根据输入的一幅图自动生成对应的描述性文字。有点类似于看图说话的感觉，该任务类似于机器翻译，网络主要结构也是encoder-decoder这一系列模型以及它们的变体。与机器翻译的区别在于编码结果是用CNN将图片信息提取的结果。图片描述早期做法如下图所示：
 ![image caption](/img/SAT/image_caption.png)
 
 其中，show and tell 是早期提出的一种解决image caption的一种有效的网络结构，结构如下：
@@ -159,7 +159,7 @@ $$ a = \{a_1,...,a_L\},a_i \in R^D $$
 #### attention机制
 attention机制与第一篇文章类似，本篇论文表达如下：
 
-$$ e_{ti} = f_att(a_i,h_{t-1}) $$
+$$ e_{ti} = f_{att}(a_i,h_{t-1}) $$
 
 $$ \alpha_{ti} = \frac{exp(e_{ti})}{\sum_{k = 1}^{L} {exp(e_{tk})}} $$
 
